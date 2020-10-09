@@ -1,0 +1,17 @@
+{
+  "development": {
+    "username": "root",
+    "password": "djm19941104",
+    "database": "shop",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+    
+  },
+  "test": {
+    "username": "root",
+    "password": "djm19941104",
+    "database": "shop_unittest",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
