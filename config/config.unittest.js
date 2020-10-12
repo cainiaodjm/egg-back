@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 10:29:18
- * @LastEditTime: 2020-10-09 10:29:26
- * @LastEditors: your name
+ * @LastEditTime: 2020-10-12 14:01:33
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /egg-simple/config/config.unittest.js
  */
@@ -16,4 +16,7 @@ exports.sequelize = {
   database: 'shop_unittest',
   username: 'root',
   password: 'djm19941104',
+  define: {
+    freezeTableName: true,
+  },
 };

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:28:45
- * @LastEditTime: 2020-10-09 11:42:47
+ * @LastEditTime: 2020-10-12 14:02:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /egg-simple/test/app/controller/user.test.js

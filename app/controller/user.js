@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 10:43:51
- * @LastEditTime: 2020-10-09 10:59:30
+ * @LastEditTime: 2020-10-09 17:37:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /egg-simple/app/controller/user.js
@@ -25,7 +25,9 @@ class UserController extends Controller {
   async show() {
     // console.log(ctx.model.User)
     const ctx = this.ctx;
-    ctx.body = await ctx.model.User.findByPk(toInt(ctx.params.id));
+    const user = await ctx.model.User.findByPk(toInt(ctx.params.id));
+    console.log(user);
+    ctx.body = user;
   }
 
   async create() {
