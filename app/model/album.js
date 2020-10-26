@@ -1,24 +1,22 @@
 /*
  * @Author: your name
- * @Date: 2020-10-09 10:43:39
- * @LastEditTime: 2020-10-20 15:38:47
+ * @Date: 2020-10-12 16:17:00
+ * @LastEditTime: 2020-10-22 18:29:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: /egg-simple/app/model/user.js
+ * @FilePath: /egg-simple/app/model/album.js
  */
 'use strict';
 module.exports = app => {
   const { STRING, INTEGER, DATE } = app.Sequelize;
-
-  const User = app.model.define('user', {
+  const Album = app.model.define('album', {
     id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-    openId: {
+    userId: { type: INTEGER,
+      field: 'user_id' },
+    albumName: {
       type: STRING(128),
-      field: 'open_id',
+      field: 'album_name',
     },
-    username: STRING(30),
-    password: STRING(128),
-    phone: STRING(128),
 
     createdAt: {
       type: DATE,
@@ -31,7 +29,7 @@ module.exports = app => {
   }, {
     timestamps: true,
     freezeTableName: true,
-    tableName: 'tb_user',
+    tableName: 'tb_album',
   });
-  return User;
+  return Album;
 };

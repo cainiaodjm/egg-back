@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 10:43:51
- * @LastEditTime: 2020-10-09 17:37:48
+ * @LastEditTime: 2020-10-26 11:16:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /egg-simple/app/controller/user.js
  */
 'use strict';
 const Controller = require('egg').Controller;
-
+const Crypto = require('../common/util/crypto');
 function toInt(str) {
   if (typeof str === 'number') return str;
   if (!str) return str;
@@ -16,6 +16,78 @@ function toInt(str) {
 }
 
 class UserController extends Controller {
+  async login() {
+    const { ctx, service } = this;
+
+    try {
+      this.ctx.validate({
+        username: {
+          type: 'string',
+        },
+        password: {
+          type: 'string',
+        },
+      });
+      const params = { ...ctx.request.body };
+      console.log(params);
+
+
+      await service.user.login(params.username, params.password);
+
+    } catch (error) {
+      console.log(error);
+      ctx.logger.warn(error.errors);
+      ctx.body = {
+        code: 200,
+        msg: error.errors.map(error => {
+          return `${error.field} ${error.message}`;
+        }),
+        success: false,
+      };
+      return;
+    }
+  }
+  async register() {
+    const ctx = this.ctx;
+    try {
+      ctx.validate({
+        username: {
+          type: 'string',
+        },
+        password: {
+          type: 'string',
+        },
+      });
+      const params = { ...ctx.request.body };
+      console.log(params);
+      const password = new Crypto(params.password).encrypt();
+      const user = await this.service.user.register(params.username, password);
+      if (!user) {
+        ctx.body = {
+          code: 200,
+          msg: '该用户已被注册',
+        };
+        return;
+      }
+      ctx.body = {
+        code: 200,
+        msg: '注册成功',
+        data: user,
+      };
+      return;
+    } catch (error) {
+      console.log(error);
+      ctx.logger.warn(error.errors);
+      ctx.body = {
+        code: 200,
+        msg: error.errors.map(error => {
+          return `${error.field} ${error.message}`;
+        }),
+        success: false,
+      };
+      return;
+    }
+  }
   async index() {
     const ctx = this.ctx;
     const query = { limit: toInt(ctx.query.limit), offset: toInt(ctx.query.offset) };
@@ -31,11 +103,21 @@ class UserController extends Controller {
   }
 
   async create() {
-    const ctx = this.ctx;
-    const { username, password, phone } = ctx.request.body;
-    const user = await ctx.model.User.create({ username, password, phone });
+    const { ctx, service } = this;
+
+    // const createRule = {
+    //   username: { type: 'string' },
+    //   password: { type: 'string' },
+    // };
+    //   // 校验参数
+    // ctx.validate(createRule);
+    // 组装参数
+    const req = ctx.request.body;
+    // 调用 Service 进行业务处理
+    const res = await service.user.create(req);
+    // 设置响应内容和响应状态码
+    ctx.body = res;
     ctx.status = 201;
-    ctx.body = user;
   }
 
   async update() {
