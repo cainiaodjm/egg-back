@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-07 18:06:10
- * @LastEditTime: 2020-10-24 11:21:42
+ * @LastEditTime: 2020-10-28 16:44:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /egg-simple/config/config.default.js
@@ -66,6 +66,9 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
+  };
+  config.multipart = {
+    mode: 'file',
   };
 
   // add your middleware config here 在这配置的都是全局的中间件

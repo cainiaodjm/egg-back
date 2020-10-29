@@ -15,7 +15,8 @@
     "egg-sequelize": "^6.0.0",
     "egg-validate": "^2.0.2",
     "jsonwebtoken": "^8.5.1",
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "qiniu": "^7.3.2"
   },
   "devDependencies": {
     "autod": "^3.0.1",

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-20 17:08:37
- * @LastEditTime: 2020-10-26 15:24:32
+ * @LastEditTime: 2020-10-26 17:46:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /egg-simple/app/common/util/jwt.js
@@ -31,7 +31,7 @@ class Jwt {
     let result;
     const cert = fs.readFileSync(path.join(__dirname, '../../../config/pem/rsa_public_key.pem'));
     jwt.verify(token, cert, { algorithms: [ 'RS256' ] }, function(err, decoded) {
-
+      // todo 好像没有过期的错误 后续处理
       if (decoded) {
         result = {
           message: 'success',
@@ -40,7 +40,6 @@ class Jwt {
         };
       }
       if (err) {
-
         result = {
           message: err.message,
           success: false,
