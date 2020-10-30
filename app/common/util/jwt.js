@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-20 17:08:37
- * @LastEditTime: 2020-10-26 17:46:24
+ * @LastEditTime: 2020-10-29 16:15:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /egg-simple/app/common/util/jwt.js
@@ -24,7 +24,19 @@ class Jwt {
     }, cert, { algorithm: 'RS256' }, { expiresIn: '1h' });
     return token;
   }
-
+  static getTokenInfo(ctx) {
+    const authorization = ctx.request.header.authorization;
+    const token = authorization.split(' ')[1];
+    const cert = fs.readFileSync(path.join(__dirname, '../../../config/pem/rsa_public_key.pem'));
+    return new Promise((resolve, reject) => {
+      jwt.verify(token, cert, { algorithms: [ 'RS256' ] }, function(err, decoded) {
+        if (err) {
+          reject(err);
+        }
+        resolve(decoded);
+      });
+    });
+  }
   // 校验token
   verifyToken() {
     const token = this.data;

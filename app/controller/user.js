@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 10:43:51
- * @LastEditTime: 2020-10-26 11:16:42
+ * @LastEditTime: 2020-10-29 17:36:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /egg-simple/app/controller/user.js
@@ -29,13 +29,10 @@ class UserController extends Controller {
         },
       });
       const params = { ...ctx.request.body };
-      console.log(params);
-
-
       await service.user.login(params.username, params.password);
 
     } catch (error) {
-      console.log(error);
+
       ctx.logger.warn(error.errors);
       ctx.body = {
         code: 200,
@@ -98,7 +95,6 @@ class UserController extends Controller {
     // console.log(ctx.model.User)
     const ctx = this.ctx;
     const user = await ctx.model.User.findByPk(toInt(ctx.params.id));
-    console.log(user);
     ctx.body = user;
   }
 

@@ -37,8 +37,6 @@ class QiuNiuController extends Controller {
     const { ctx } = this;
     const file = ctx.request.files[0];
     const name = path.basename(file.filename);
-    // eslint-disable-next-line no-unused-vars
-    let result;
     try {
       const res = await Qiniu.QiniuYun.uploadFile(name, file.filepath);
       console.log(res);
@@ -59,7 +57,6 @@ class QiuNiuController extends Controller {
         data: error,
       };
     } finally {
-
       await fs.unlink(file.filepath);
     }
   }

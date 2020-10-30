@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-20 17:54:17
- * @LastEditTime: 2020-10-26 15:25:55
+ * @LastEditTime: 2020-10-29 16:36:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /egg-simple/app/middleware/jwt.js
@@ -22,8 +22,7 @@ module.exports = options => {
       return;
     }
     const token = authorization.split(' ')[1];
-
-
+    // const token = authorization;
     const verifyRes = new Jwt(token).verifyToken();
     if (!verifyRes.success) {
       ctx.status = 401;

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-07 18:06:10
- * @LastEditTime: 2020-10-28 17:09:11
+ * @LastEditTime: 2020-10-29 15:33:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /egg-simple/app/router.js
@@ -23,6 +23,7 @@ module.exports = app => {
   router.get(`${qiniuPrefixVersion}/getToken`, jwt, controller.qiniu.getPrivateToken);
   router.post(`${qiniuPrefixVersion}/callback`, controller.qiniu.handleCb);
   router.post(`${qiniuPrefixVersion}/upload`, controller.qiniu.uploadFile);
+  router.resources('album', `${prefixVersion}/album`, jwt, controller.album);
   // 挂载鉴权路由
   app.passport.mount('github');
   // 文件上传
